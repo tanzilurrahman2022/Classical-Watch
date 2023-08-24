@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap Watch Example</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card" style="border-radius: 20px; background-color: deepskyblue; margin-top: 50%;">
+        <div class="card-header text-center">
+          <h4 style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #fff;">Classic Watch</h4>
+        </div>
+        <div class="card-body" style="background-color: beige; border-radius: 0 0 20px 20px;">
+          <div class="watch">
+            <div class="watch-face">
+              <div class="hour-hand"></div>
+              <div class="minute-hand"></div>
+              <div class="second-hand"></div>
+              <div class="center-circle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+<style>
+  .watch {
+    width: 200px;
+    height: 200px;
+    border: 10px solid #e93c3c;
+    border-radius: 50%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .watch-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hour-hand,
+  .minute-hand,
+  .second-hand {
+    position: absolute;
+    transform-origin: 50% 100%;
+    background-color: #333;
+    transition: transform 0.5s cubic-bezier(0.4, 2.1, 0.2, 1);
+  }
+
+  .hour-hand {
+    width: 6px;
+    height: 40px;
+    top: 30%;
+    left: 47%;
+    transform: rotate(90deg);
+  }
+
+  .minute-hand {
+    width: 4px;
+    height: 50px;
+    top: 25%;
+    left: 48%;
+    transform: rotate(180deg);
+  }
+
+  .second-hand {
+    width: 2px;
+    height: 60px;
+    top: 20%;
+    left: 49%;
+    transform: rotate(270deg);
+    background-color: red;
+  }
+
+  .center-circle {
+    width: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+</style>
+<script>
+    function updateWatch() {
+      const now = new Date();
+      const seconds = now.getSeconds();
+      const minutes = now.getMinutes();
+      const hours = now.getHours() % 12;
+  
+      const secondHand = document.querySelector('.second-hand');
+      const minuteHand = document.querySelector('.minute-hand');
+      const hourHand = document.querySelector('.hour-hand');
+  
+      const secondDegrees = ((seconds / 60) * 360) + 90;
+      const minuteDegrees = ((minutes / 60) * 360) + 90;
+      const hourDegrees = ((hours / 12) * 360) + ((minutes / 60) * 30) + 90;
+  
+      secondHand.style.transform = `rotate(${secondDegrees}deg)`;
+      minuteHand.style.transform = `rotate(${minuteDegrees}deg)`;
+      hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+    }
+  
+    setInterval(updateWatch, 1000);
+  </script>
+  
